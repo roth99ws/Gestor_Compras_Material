@@ -39,3 +39,15 @@ Este proyecto es una aplicación web que facilita la gestión de compras de mate
    ```bash
    git clone https://github.com/tuusuario/gestor-compras-constructora.git
    cd gestor-compras-constructora
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/). 
+
+### Lo que significa:
+
+- **Uso No Comercial:** Puedes usar, compartir y modificar el código para fines no comerciales. Esto significa que no puedes utilizar este proyecto ni sus derivados con fines de lucro sin obtener previamente el permiso del autor.
+- **Atribución:** Debes dar crédito adecuado al autor original, proporcionar un enlace a la licencia e indicar si se han realizado cambios. Puedes hacerlo de cualquier manera razonable, pero no de una manera que sugiera que el autor te respalda a ti o tu uso del código.
+- **Modificaciones:** Puedes modificar el código y distribuir tus versiones modificadas, pero no puedes aplicar restricciones legales o tecnológicas que impidan a otros usuarios hacer lo mismo con tu versión.
+
+Para obtener más detalles sobre esta licencia, visita el sitio oficial de [Creative Commons](https://creativecommons.org/licenses/by-nc/4.0/).
