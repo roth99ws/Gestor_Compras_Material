@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras de Material Estructural</title>
+    <link rel="stylesheet" href="../01-Style/styleVentana3-1.css">
+</head>
+<body>
+
+    <div class="main-content">
+        <h2>Materiales Estructurales</h2>
+        <div class="content-wrapper">
+            <!-- Contenedor de Materiales -->
+            <div class="materials-container">
+                <div class="materials-grid">
+                    <a href="formulario.html?material=Concreto" class="material-item">Concreto</a>
+                    <a href="formulario.html?material=Madera" class="material-item">Madera</a>
+                    <a href="formulario.html?material=Varilla" class="material-item">Varilla</a>
+                    <a href="formulario.html?material=Acero" class="material-item">Acero</a>
+                    <a href="formulario.html?nuevo=true" class="material-item add-material">+ Agregar otro material</a>
+                </div>
+            </div>
+            
+            <!-- Contenedor de Listas de Pedidos y Cancelados -->
+            <div class="order-lists-container">
+                <div class="order-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Items Description</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí sigue tu código de items predefinidos -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cancelled-orders">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cancelled Orders</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí sigue tu código de items cancelados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <button class="back-button" onclick="goBack()">Regresar</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

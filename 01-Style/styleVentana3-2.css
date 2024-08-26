@@ -1,0 +1,85 @@
+/* Reseteo básico */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Contenedor principal */
+.main-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo del título */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Contenedor de opciones */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Estilo de cada opción */
+.option {
+    display: flex;
+    align-items: center;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.option:hover {
+    transform: scale(1.02);
+    background-color: #555;
+}
+
+.option-image {
+    width: 150px;
+    height: 100px;
+    background-color: #e07b00;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.option-details {
+    flex-grow: 1;
+}
+
+.option-details h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.option-details p {
+    margin: 5px 0 0;
+    color: #ccc;
+}
+
+/* Botón de regreso */
+.back-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e07b00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #d06800;
+}

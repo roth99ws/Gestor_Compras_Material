@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Compras - Ventana 2</title>
+    <link rel="stylesheet" href="../01-Style/styleVentana-2.css">
+</head>
+<body>
+    <div class="main-content">
+        <h2>Selecciona una Categoría</h2>
+        <div class="options">
+            <div class="option" onclick="navigateTo('Estructural')">
+                <div class="option-image"></div>
+                <div class="option-details">
+                    <h3>Estructural</h3>
+                    <p>Detalles sobre materiales estructurales</p>
+                    <button class="option-button">Seleccionar</button>
+                </div>
+            </div>
+            <div class="option" onclick="navigateTo('Acabados')">
+                <div class="option-image"></div>
+                <div class="option-details">
+                    <h3>Acabados</h3>
+                    <p>Detalles sobre materiales de acabados</p>
+                    <button class="option-button">Seleccionar</button>
+                </div>
+            </div>
+        </div>
+        <button class="back-button" onclick="goBack()">Regresar</button>
+    </div>
+
+    <script>
+        function navigateTo(category) {
+            if (category === 'Estructural') {
+                window.location.href = 'ventana3_1.html';
+            } else if (category === 'Acabados') {
+                window.location.href = 'ventana3_2.html';
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

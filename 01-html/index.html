@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Compras - Ventana 1</title>
+    <link rel="stylesheet" href="../01-Style/styleMenuPrincipal.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="search-bar">Buscar...</div>
+        <div class="user-info">Usuario</div>
+    </div>
+    
+    <div class="main-wrapper">
+        <div class="sidebar">
+            <div class="sidebar-logo">LOGO</div>
+            <ul class="sidebar-menu">
+                <li>Agregar Casa</li>
+                <li>Agregar Desarrollo</li>
+                <li>Opcion 3</li>
+                <li>Opción 4</li>
+                <li>Opción 5</li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="projects">
+                <div class="project" onclick="navigateTo('Ventana2')">Casa 1</div>
+                <div class="project" onclick="navigateTo('Ventana2')">Casa 2</div>
+                <div class="project" onclick="navigateTo('Ventana2')">Casa 3</div>
+                <div class="project" onclick="navigateTo('Ventana2')">Casa 4</div>
+                <div class="project" onclick="navigateTo('Ventana2')">Desarrollo 5</div>
+                <div class="project" onclick="navigateTo('Ventana2')">Desarrollo 6</div>
+            </div>
+            <div class="analytics-section">
+                <div class="analytics-title-wrapper">
+                    <h2 class="analytics-title">Tabla de Análisis Mensual</h2>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Net Revenue</h3>
+                        <p class="value">$3,131,021</p>
+                        <p class="change">+0.4% vs last month</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>ARR</h3>
+                        <p class="value">$1,511,121</p>
+                        <p class="change">+2% vs last quarter</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Quarterly Revenue Goal</h3>
+                        <p class="value">71%</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>New Orders</h3>
+                        <p class="value">18,221</p>
+                        <p class="change">+15% vs last quarter</p>
+                    </div>
+                    <div class="analytics-card large-card">
+                        <h3>Sales Overview</h3>
+                        <div class="sales-overview">
+                            <div class="chart">
+                                <div class="chart-circle">
+                                    <span>102k</span>
+                                </div>
+                            </div>
+                            <div class="sales-details">
+                                <p><span class="category">Electronic</span><span class="amount">$59,640</span></p>
+                                <p><span class="category">Clothes</span><span class="amount">$1,840</span></p>
+                                <p><span class="category">Furniture</span><span class="amount">$11,420</span></p>
+                                <p><span class="category">Shoes</span><span class="amount">$2,310</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>New Customers</h3>
+                        <p class="value">862</p>
+                        <p class="change">Last week</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Total Profit</h3>
+                        <p class="value">$136,785.77</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            if (page === 'Ventana2') {
+                window.location.href = 'ventana2.html';
+            }
+        }
+    </script>
+</body>
+
+<script>
+    document.addEventListener('mousemove', function(e) {
+        const topBar = document.querySelector('.top-bar');
+        if (e.clientY < 50) { // Si el mouse está en los primeros 50px desde arriba
+            topBar.classList.add('show');
+        } else {
+            topBar.classList.remove('show');
+        }
+    });
+</script>
+
+
+</html>

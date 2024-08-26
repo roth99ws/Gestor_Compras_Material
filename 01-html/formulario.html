@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura de Material</title>
+    <link rel="stylesheet" href="../01-Style/styleFormulario.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Bienvenido a la Captura de Material</h1>
+            <p>Completa los siguientes pasos para agregar un material</p>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="form-content">
+            <form id="materialForm">
+                <div class="form-group">
+                    <label for="material">Material:</label>
+                    <select id="material" name="material" onchange="populatePreFilledData()" required>
+                        <option value="">Selecciona un material</option>
+                        <option value="Material 1">Material 1</option>
+                        <option value="Material 2">Material 2</option>
+                        <!-- Agregar más opciones de materiales según sea necesario -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="precio">Precio/Unidad:</label>
+                    <input type="number" id="precio" name="precio" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Fecha de Pedido:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="proveedor">Proveedor:</label>
+                    <input type="text" id="proveedor" name="proveedor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="obra">Obra:</label>
+                    <input type="text" id="obra" name="obra" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado" name="estado" required>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../01-Scripts/formulario.js"></script>
+</body>
+</html>

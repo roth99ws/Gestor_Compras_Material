@@ -1,0 +1,108 @@
+/* Reseteo básico */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido principal */
+.main-content {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Opciones */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.option {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    border: 2px solid transparent; /* Borde transparente para hover */
+}
+
+.option:hover {
+    transform: scale(1.03);
+    background-color: #555;
+    border-color: #e07b00; /* Borde naranja en hover */
+}
+
+.option-image {
+    width: 100px;
+    height: 100px;
+    background-color: #e07b00;
+    border-radius: 10px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.option-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.option-details h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+}
+
+.option-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #bbb;
+}
+
+.option-button {
+    background-color: #e07b00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+    background-color: #d06800;
+}
+
+/* Botón de regreso */
+.back-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e07b00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.back-button:hover {
+    background-color: #d06800;
+}

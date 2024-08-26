@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales de <span id="area-name"></span></title>
+    <link rel="stylesheet" href="../01-Style/styleVentana4.css">
+</head>
+<body>
+    <div class="main-content">
+        <h2>Materiales de <span id="area-title"></span></h2>
+        <div class="content-wrapper">
+            <!-- Contenedor de Materiales -->
+            <div class="materials-container">
+                <div class="materials-grid" id="materials-grid">
+                    <!-- Los materiales se añadirán dinámicamente aquí -->
+                </div>
+            </div>
+            
+            <!-- Contenedor de Listas de Pedidos y Cancelados -->
+            <div class="order-lists-container">
+                <div class="order-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Items Description</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order-list">
+                            <!-- Los pedidos se añadirán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cancelled-orders">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cancelled Orders</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cancelled-orders">
+                            <!-- Los pedidos cancelados se añadirán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <button class="back-button" onclick="goBack()">Regresar</button>
+    </div>
+
+    <script src="../01-Scripts/navigate.js"></script>
+</body>
+</html>
