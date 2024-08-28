@@ -1,11 +1,31 @@
 // Este archivo debería llamarse formulario.js
 
-// Datos prediseñados para cada material
-const materialData = {
-    'Material 1': { precio: 100.00, proveedor: 'Proveedor A', obra: 'Obra 1', estado: 'Activo' },
-    'Material 2': { precio: 150.00, proveedor: 'Proveedor B', obra: 'Obra 2', estado: 'Pendiente' },
-    // Agrega más materiales según sea necesario
-};
+// Inicialización del objeto de materiales prediseñados
+let materialData = {};
+
+// Función para cargar datos de Google Sheets
+async function loadMaterialData() {
+    try {
+        const response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: 'tu_spreadsheetId', // Reemplaza con tu ID de hoja de cálculo
+            range: 'Materiales Prediseñados!A2:G',
+        });
+
+        const rows = response.result.values;
+
+        // Procesar cada fila y llenar el objeto materialData
+        rows.forEach(row => {
+            const [id, area, material, precio, proveedor, obra, estado] = row;
+            materialData[material] = { precio, proveedor, obra, estado };
+        });
+
+        // Llamar a la función de pre-rellenado después de cargar los datos
+        populatePreFilledData();
+
+    } catch (error) {
+        console.error("Error al cargar los datos de Google Sheets: ", error);
+    }
+}
 
 // Función que se ejecuta cuando se selecciona un material en el formulario
 function populatePreFilledData() {
@@ -27,7 +47,7 @@ function populatePreFilledData() {
 }
 
 // Función para enviar los datos a Google Sheets
-function submitForm() {
+async function submitForm() {
     const material = document.getElementById('material').value;
     const cantidad = document.getElementById('cantidad').value;
     const precio = document.getElementById('precio').value;
@@ -42,19 +62,23 @@ function submitForm() {
         return;
     }
 
-    // Aquí puedes integrar la API de Google Sheets para enviar los datos
-    // Por ejemplo, usando Google Apps Script o un Web App
+    try {
+        // Enviar los datos a Google Sheets
+        await gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: 'tu_spreadsheetId', // Reemplaza con tu ID de hoja de cálculo
+            range: 'Pedidos!A:G',
+            valueInputOption: 'USER_ENTERED',
+            resource: {
+                values: [[material, cantidad, precio, fecha, proveedor, obra, estado]],
+            },
+        });
 
-    alert('Datos enviados:\n' +
-          'Material: ' + material + '\n' +
-          'Cantidad: ' + cantidad + '\n' +
-          'Precio/Unidad: ' + precio + '\n' +
-          'Fecha: ' + fecha + '\n' +
-          'Proveedor: ' + proveedor + '\n' +
-          'Obra: ' + obra + '\n' +
-          'Estado: ' + estado);
-
-    // Aquí podrías hacer una redirección o limpieza del formulario después del envío exitoso
+        alert('Datos enviados exitosamente.');
+        // Limpiar el formulario o redireccionar si es necesario
+    } catch (error) {
+        console.error("Error al enviar los datos a Google Sheets: ", error);
+        alert('Hubo un error al enviar los datos.');
+    }
 }
 
 // Asociar el envío del formulario a la función submitForm
@@ -63,6 +87,8 @@ document.getElementById('materialForm').onsubmit = function(event) {
     submitForm();
 };
 
-// Asegúrate de que la función populatePreFilledData se ejecute cuando se cargue la página o se cambie el material
-window.onload = populatePreFilledData;
-document.getElementById('material').onchange = populatePreFilledData;
+// Cargar los datos al inicio y asociar el cambio de material a la función de pre-rellenado
+window.onload = async function () {
+    await loadMaterialData();
+    document.getElementById('material').onchange = populatePreFilledData;
+};

@@ -1,91 +1,99 @@
 // Este archivo debería llamarse navigate.js
 
-const areas = {
-    'Carpintería': {
-        materials: ['Material 1 de Carpintería', 'Material 2 de Carpintería', 'Material 3 de Carpintería', 'Material 4 de Carpintería'],
-        orders: [
-            { description: 'Item 1', unit: 2, rate: 200.00, price: 400.00, detail: 'Descripción 1 para Carpintería' },
-            { description: 'Item 2', unit: 2, rate: 300.00, price: 600.00, detail: 'Descripción 2 para Carpintería' },
-        ],
-        cancelled: [
-            { description: 'Item cancelado 1', unit: 1, rate: 150.00, price: 150.00, detail: 'Motivo cancelación 1 para Carpintería' },
-            { description: 'Item cancelado 2', unit: 1, rate: 100.00, price: 100.00, detail: 'Motivo cancelación 2 para Carpintería' },
-        ]
-    },
-    'Eléctrica': {
-        materials: ['Material 1 de Eléctrica', 'Material 2 de Eléctrica', 'Material 3 de Eléctrica', 'Material 4 de Eléctrica'],
-        orders: [
-            { description: 'Item 1', unit: 3, rate: 150.00, price: 450.00, detail: 'Descripción 1 para Eléctrica' },
-            { description: 'Item 2', unit: 5, rate: 220.00, price: 1100.00, detail: 'Descripción 2 para Eléctrica' },
-        ],
-        cancelled: [
-            { description: 'Item cancelado 1', unit: 1, rate: 120.00, price: 120.00, detail: 'Motivo cancelación 1 para Eléctrica' },
-            { description: 'Item cancelado 2', unit: 2, rate: 110.00, price: 220.00, detail: 'Motivo cancelación 2 para Eléctrica' },
-        ]
-    },
-    'Pintura': {
-        materials: ['Material 1 de Pintura', 'Material 2 de Pintura', 'Material 3 de Pintura', 'Material 4 de Pintura'],
-        orders: [
-            { description: 'Item 1', unit: 2, rate: 200.00, price: 400.00, detail: 'Descripción 1 para Pintura' },
-            { description: 'Item 2', unit: 2, rate: 300.00, price: 600.00, detail: 'Descripción 2 para Pintura' },
-        ],
-        cancelled: [
-            { description: 'Item cancelado 1', unit: 1, rate: 150.00, price: 150.00, detail: 'Motivo cancelación 1 para Pintura' },
-            { description: 'Item cancelado 2', unit: 1, rate: 100.00, price: 100.00, detail: 'Motivo cancelación 2 para Pintura' },
-        ]
-    },
-    'Plomería': {
-        materials: ['Material 1 de Plomería', 'Material 2 de Plomería', 'Material 3 de Plomería', 'Material 4 de Plomería'],
-        orders: [
-            { description: 'Item 1', unit: 2, rate: 200.00, price: 400.00, detail: 'Descripción 1 para Plomería' },
-            { description: 'Item 2', unit: 2, rate: 300.00, price: 600.00, detail: 'Descripción 2 para Plomería' },
-        ],
-        cancelled: [
-            { description: 'Item cancelado 1', unit: 1, rate: 150.00, price: 150.00, detail: 'Motivo cancelación 1 para Plomería' },
-            { description: 'Item cancelado 2', unit: 1, rate: 100.00, price: 100.00, detail: 'Motivo cancelación 2 para Plomería' },
-        ]
+// Cargar las variables de entorno
+require('dotenv').config();
+
+// Asignar las credenciales desde las variables de entorno
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
+const API_KEY = process.env.API_KEY;
+
+async function loadMaterialsFromSheets(area) {
+    try {
+        const response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID, // Usamos la variable de entorno
+            range: 'MaterialesP!A:G',
+        });
+
+        const materialsData = response.result.values;
+
+        const filteredMaterials = materialsData.filter(row => row[1] === area);
+        const materialsGrid = document.getElementById('materials-grid');
+        materialsGrid.innerHTML = '';
+
+        filteredMaterials.forEach(row => {
+            const [id, area, material, precio, proveedor, obra, estado] = row;
+            const div = document.createElement('div');
+            div.classList.add('material-item');
+            div.textContent = material;
+            div.setAttribute('href', `formulario.html?material=${material}`);
+            materialsGrid.appendChild(div);
+        });
+
+        // También puedes cargar las órdenes relacionadas si están en otra hoja
+        await loadOrdersFromSheets(area);
+
+    } catch (error) {
+        console.error("Error al cargar los materiales desde Google Sheets", error);
     }
-};
+}
 
+async function loadOrdersFromSheets(area) {
+    try {
+        const response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID, // Usamos la variable de entorno
+            range: 'Pedidos!A2:G',
+        });
 
-function loadArea(area) {
-    const areaData = areas[area];
+        const ordersData = response.result.values;
+        const filteredOrders = ordersData.filter(row => row[1] === area);
 
-    if (!areaData) return;
+        const orderList = document.getElementById('order-list');
+        orderList.innerHTML = '';
 
-    document.getElementById('area-name').textContent = area;
-    document.getElementById('area-title').textContent = area;
+        filteredOrders.forEach(row => {
+            const [description, unit, rate, price, detail] = row;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><strong>${description}</strong><br><span class="description">${detail}</span></td>
+                            <td>${unit}</td>
+                            <td>$${rate}</td>
+                            <td>$${price}</td>`;
+            orderList.appendChild(tr);
+        });
 
-    const materialsGrid = document.getElementById('materials-grid');
-    materialsGrid.innerHTML = '';
-    areaData.materials.forEach(material => {
-        const div = document.createElement('div');
-        div.classList.add('material-item');
-        div.textContent = material;
-        materialsGrid.appendChild(div);
-    });
+        // Cargar órdenes canceladas si es necesario
+        await loadCancelledOrdersFromSheets(area);
 
-    const orderList = document.getElementById('order-list');
-    orderList.innerHTML = '';
-    areaData.orders.forEach(order => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td><strong>${order.description}</strong><br><span class="description">${order.detail}</span></td>
-                        <td>${order.unit}</td>
-                        <td>$${order.rate.toFixed(2)}</td>
-                        <td>$${order.price.toFixed(2)}</td>`;
-        orderList.appendChild(tr);
-    });
+    } catch (error) {
+        console.error("Error al cargar las órdenes desde Google Sheets", error);
+    }
+}
 
-    const cancelledOrders = document.getElementById('cancelled-orders');
-    cancelledOrders.innerHTML = '';
-    areaData.cancelled.forEach(cancel => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td><strong>${cancel.description}</strong><br><span class="description">${cancel.detail}</span></td>
-                        <td>${cancel.unit}</td>
-                        <td>$${cancel.rate.toFixed(2)}</td>
-                        <td>$${cancel.price.toFixed(2)}</td>`;
-        cancelledOrders.appendChild(tr);
-    });
+async function loadCancelledOrdersFromSheets(area) {
+    try {
+        const response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID, // Usamos la variable de entorno
+            range: 'Pedidos Cancelados!A2:G',
+        });
+
+        const cancelledData = response.result.values;
+        const filteredCancelled = cancelledData.filter(row => row[1] === area);
+
+        const cancelledOrders = document.getElementById('cancelled-orders');
+        cancelledOrders.innerHTML = '';
+
+        filteredCancelled.forEach(row => {
+            const [description, unit, rate, price, detail] = row;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><strong>${description}</strong><br><span class="description">${detail}</span></td>
+                            <td>${unit}</td>
+                            <td>$${rate}</td>
+                            <td>$${price}</td>`;
+            cancelledOrders.appendChild(tr);
+        });
+
+    } catch (error) {
+        console.error("Error al cargar las órdenes canceladas desde Google Sheets", error);
+    }
 }
 
 function navigateTo(area) {
@@ -97,10 +105,10 @@ function goBack() {
 }
 
 // Carga del área específica en la ventana 4
-window.onload = function () {
+window.onload = async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const area = urlParams.get('area');
     if (area) {
-        loadArea(area);
+        await loadMaterialsFromSheets(area);
     }
 };

@@ -7,7 +7,6 @@ body, html {
     background-color: #333; /* Color de fondo oscuro */
     color: #fff; /* Color de texto blanco */
     height: 100%; /* Altura total */
-    overflow: hidden; /* Evita barras de desplazamiento no deseadas */
 }
 
 /* Barra superior */
@@ -27,6 +26,7 @@ body, html {
 .top-bar.show {
     top: 0; /* Mueve la barra superior a la posición visible */
 }
+
 /* Barra de búsqueda dentro de la barra superior */
 .search-bar {
     width: 250px; /* Ancho de la barra de búsqueda */
@@ -36,13 +36,21 @@ body, html {
     color: #fff; /* Color del texto */
 }
 
-/* Información del usuario (botón de usuario) dentro de la barra superior */
-.user-info {
-    padding: 10px; /* Espaciado interno */
-    background-color: #555; /* Fondo gris más oscuro */
+/* Estilo para los botones de autorización */
+.auth-buttons button {
+    background-color: #e07b00; /* Fondo naranja */
+    color: white; /* Texto blanco */
+    border: none; /* Sin bordes */
+    padding: 10px 15px; /* Espaciado interno */
+    margin-left: 10px; /* Espacio entre botones */
     border-radius: 5px; /* Bordes redondeados */
-    color: #fff; /* Color del texto */
-    margin-right: 20px; /* Margen a la derecha para alejarlo del borde derecho de la pantalla */
+    cursor: pointer; /* Cambia el cursor a pointer al pasar sobre el botón */
+    font-size: 14px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.auth-buttons button:hover {
+    background-color: #d06800; /* Color de fondo más oscuro al hacer hover */
 }
 
 /* Envoltura principal que contiene la barra lateral y el contenido principal */
@@ -141,6 +149,7 @@ body, html {
     display: flex; /* Alinea los elementos dentro de esta sección */
     justify-content: center; /* Centra el contenido horizontalmente */
     align-items: center; /* Alinea el contenido verticalmente */
+    flex-direction: column; /* Asegura que el título y la cuadrícula estén en columnas */
 }
 
 /* Grid para organizar las tarjetas analíticas */
@@ -255,29 +264,10 @@ body, html {
     color: #fff; /* Color del texto blanco */
 }
 
-
 /* Contenedor del título para centrarlo */
 .analytics-title {
     color: #fff; /* Color del texto */
     font-size: 24px; /* Tamaño del texto */
     text-align: center; /* Centra el texto horizontalmente */
     margin-bottom: 20px; /* Añade espacio debajo del título */
-}
-
-/* Contenedor de la sección de análisis */
-.analytics-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column; /* Asegura que el título y la cuadrícula estén en columnas */
-    align-items: center; /* Centra horizontalmente todo el contenido */
-    margin-top: 20px; /* Espaciado superior para separar del contenido anterior */
-}
-
-/* Grid para organizar las tarjetas analíticas */
-.analytics-grid {
-    display: grid; /* Utiliza un grid para organizar las tarjetas */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tarjetas responsivas, mínimo 250px */
-    gap: 20px; /* Espaciado entre las tarjetas */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 1200px; /* Ancho máximo del grid */
 }

@@ -6,18 +6,16 @@ body, html {
     font-family: Arial, sans-serif;
     background-color: #333;
     color: #fff;
-    height: 100%;
+    height: 100%; /* Mantén esto solo si necesitas que el contenido ocupe toda la altura */
     overflow-x: hidden; /* Oculta el desbordamiento horizontal */
 }
 
 /* Contenedor principal */
 .main-content {
-    flex-grow: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
 }
 
 /* Contenedor general para materiales y tablas */
@@ -100,7 +98,7 @@ body, html {
     gap: 20px; /* Espacio entre las dos tablas */
 }
 
-/* Estilo de la tabla de pedidos */
+/* Estilo compartido para la tabla de pedidos y cancelados */
 .order-list table, .cancelled-orders table {
     width: 100%;
     border-collapse: collapse;
