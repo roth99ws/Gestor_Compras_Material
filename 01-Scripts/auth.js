@@ -4,15 +4,18 @@
   /* exported handleSignoutClick */
 
   // TODO(developer): Set to client ID and API key from the Developer Console
-  require('dotenv').config();
+ // require('dotenv').config();
+  // auth.js
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const API_KEY = process.env.API_KEY;
+  console.log('Inicializando script auth.js...');
+  const CLIENT_ID = CONFIG.CLIENT_ID;
+  const API_KEY = CONFIG.API_KEY;
+  
+
 
 // El resto de tu código...
 
- // const CLIENT_ID = '368556346667-kolmc2a0jv6bfisevo10cg2o182mleoo.apps.googleusercontent.com';
-//  const API_KEY = 'AIzaSyC54ZR-OBTRvjnC-0UFaVEHzFCMDMczmy0';
+
 
   // Discovery doc URL for APIs used by the quickstart
   const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
@@ -109,10 +112,7 @@ const API_KEY = process.env.API_KEY;
     }
   }
 
-  /**
-   * Print the names and majors of students in a sample spreadsheet:
-   * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-   */
+   
   async function listMajors() {
 
 
